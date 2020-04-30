@@ -22,21 +22,21 @@ $sth = $pdo -> query($sql);
 $aryList = $sth -> fetchAll(PDO::FETCH_COLUMN);
 
 // 選ぶ元となる全体を配列で与え、抜き取る数を与えると全ての組み合わせを配列で返す関数
-function kumiawase($zentai,$nukitorisu){
-  $zentaisu=count($zentai);
-  if($zentaisu<$nukitorisu){
+function combination ($whole,$pickupNumber){
+  $wholeNumber = count ($whole);
+  if ($wholeNumber < $pickupNumber) {
     return;
-  }elseif($nukitorisu==1){
-    for($i=0;$i<$zentaisu;$i++){
-      $arrs[$i]=array($zentai[$i]);
+  } elseif ($pickupNumber == 1){
+    for ($i = 0; $i < $wholeNumber;$i++){
+      $arrs[$i] = array ($whole[$i]);
     }
-  }elseif($nukitorisu>1){
-    $j=0;
-    for($i=0;$i<$zentaisu-$nukitorisu+1;$i++){
-      $ts=kumiawase(array_slice($zentai,$i+1),$nukitorisu-1);
-      foreach($ts as $t){
-        array_unshift($t,$zentai[$i]);
-        $arrs[$j]=$t;
+  } elseif ($pickupNumber>1){
+    $j = 0;
+    for ($i = 0; $i < $wholeNumber - $pickupNumber + 1; $i++){
+      $cuts = combination(array_slice($whole,$i + 1),$pickupNumber - 1);
+      foreach ($cuts as $cut){
+        array_unshift ($cut,$whole[$i]);
+        $arrs[$j] = $cut;
         $j++;
       }
     }
@@ -46,22 +46,23 @@ function kumiawase($zentai,$nukitorisu){
 
 // 合計数$numと組み合わせ処理で得た数が同一かどうか調べ、同一であれば答えの配列に入れる関数
 function find_combinations($lis, $num){
-  $ans = [];
-  for($i=1; $i< count($lis)+1; $i++){
-      foreach(kumiawase($lis, $i) as $val){
-          if(array_sum($val)==$num){
-              array_push($ans, $val);
+  $answer_list = [];
+  for ($i = 1; $i < count($lis)+1; $i++){
+      foreach (combination($lis, $i) as $val){
+          if (array_sum($val) == $num){
+              array_push($answer_list, $val);
           } 
       }
   }
-  return $ans;
+  return $answer_list;
 }
 
 // DBから取ってきた配列とtargetで入力された数字での組み合わせを表示
-$answer = find_combinations($aryList,$limit);
-$json_answer = json_encode($answer);
-if($limit >= 1){
-  echo ($json_answer);
+$answer = find_combinations ($aryList,$limit);
+$json_answer = json_encode ($answer);
+
+if(preg_match('/^([1-9]\d*|0)\.(\d+)?$/', $limit) || $limit < 1){
+  http_response_code(400);
 } else {
-  echo 'HTTP400エラー';
+  echo ($json_answer);
 }
