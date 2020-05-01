@@ -59,7 +59,8 @@ function combination($whole, $pickupNumber)
 function find_combinations($lis, $num)
 {
   $answer_list = [];
-  for ($i = 1; $i < count($lis) + 1; $i++) {
+  $length = count($lis);
+  for ($i = 1; $i < $length + 1; $i++) {
     foreach (combination($lis, $i) as $val) {
       if (array_sum($val) == $num) {
         array_push($answer_list, $val);
