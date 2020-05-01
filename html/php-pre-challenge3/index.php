@@ -6,8 +6,9 @@ $limit = $_GET['target'];
 // もしlimitが１以上の整数でなければ400を返す
 if (preg_match('/^([1-9]\d*|0)\.(\d+)?$/', $limit) || $limit < 1) {
   http_response_code(400);
-} else {
-  echo ($json_answer);
+  $errMsg = 'invalid limit: ' . $limit;
+  echo json_encode($errMsg, JSON_UNESCAPED_UNICODE);
+  die();
 }
 
 // db接続情報
@@ -71,10 +72,4 @@ function find_combinations($lis, $num)
 // DBから取ってきた配列とtargetで入力された数字での組み合わせを表示
 $answer = find_combinations($aryList, $limit);
 $json_answer = json_encode($answer);
-
-// もしlimitが１以上の整数でなければ400を返す
-if (preg_match('/^([1-9]\d*|0)\.(\d+)?$/', $limit) || $limit < 1) {
-  http_response_code(400);
-} else {
-  echo ($json_answer);
-}
+echo ($json_answer);
