@@ -3,6 +3,11 @@
 // URLで入力されるtarget値$limitに代入している
 $limit = $_GET['target'];
 
+// もしlimitが１以上の整数でなければ400を返す
+if (preg_match('/^([1-9]\d*|0)\.(\d+)?$/', $limit) || $limit < 1) {
+  http_response_code(400);
+}
+
 // db接続情報
 $dsn = 'mysql:dbname=test;host=mysql';
 $dbuser = 'test';
@@ -63,8 +68,4 @@ function find_combinations($lis, $num)
 $answer = find_combinations($aryList, $limit);
 $json_answer = json_encode($answer);
 
-if (preg_match('/^([1-9]\d*|0)\.(\d+)?$/', $limit) || $limit < 1) {
-  http_response_code(400);
-} else {
-  echo ($json_answer);
-}
+echo ($json_answer);
