@@ -6,6 +6,8 @@ $limit = $_GET['target'];
 // もしlimitが１以上の整数でなければ400を返す
 if (preg_match('/^([1-9]\d*|0)\.(\d+)?$/', $limit) || $limit < 1) {
   http_response_code(400);
+} else {
+  echo ($json_answer);
 }
 
 // db接続情報
@@ -18,7 +20,9 @@ try {
   // pdoクラスのインスタンス化
   $pdo = new PDO($dsn, $dbuser, $dbpassword);
 } catch (PDOException $e) {
-  echo 'DBに接続できていません' . $e->getMessage();
+  $errMsg = 'DBに接続できていません' . $e->getMessage();
+  echo json_encode($errMsg);
+  die();
 }
 
 // prechallenege内の数字をaryListに格納
@@ -68,4 +72,9 @@ function find_combinations($lis, $num)
 $answer = find_combinations($aryList, $limit);
 $json_answer = json_encode($answer);
 
-echo ($json_answer);
+// もしlimitが１以上の整数でなければ400を返す
+if (preg_match('/^([1-9]\d*|0)\.(\d+)?$/', $limit) || $limit < 1) {
+  http_response_code(400);
+} else {
+  echo ($json_answer);
+}
