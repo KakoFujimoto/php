@@ -27,7 +27,7 @@ try {
 }
 
 // prechallenege内の数字をaryListに格納
-$sql = "SELECT * FROM prechallenge3 ORDER BY value ASC";
+$sql = "SELECT * FROM prechallenge3 WHERE value <= $limit ORDER BY value ASC";
 $sth = $pdo->query($sql);
 $aryList = $sth->fetchAll(PDO::FETCH_COLUMN);
 
