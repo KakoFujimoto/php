@@ -190,13 +190,13 @@ if (isset($_REQUEST['retweet'])) {
 								返信元のメッセージ</a>
 						<?php endif; ?>
 						<?php if ($_SESSION['id'] === $post['member_id']) : ?>
-							[<a href="delete.php?id=<?php print h($post_id); ?>" style="color: #F33;">削除</a>]
+							[<a href="delete.php?id=<?php print h($post['id']); ?>" style="color: #F33;">削除</a>]
 						<?php endif; ?>
 						<!---- ===========「いいね！」ここから ============= ---->
 						<!-- ログインユーザーがいいね！済みかどうか確認 -->
 						<?php
 						//いいね！する投稿がリツイートされていれば、リツイート元のpostIDを利用する
-						if (is_null($post['retweet_id'])) {
+						if ($post['retweet_id'] > 0) {
 							$post_id = $post['retweet_id'];
 						} else {
 							$post_id = $post['id'];
