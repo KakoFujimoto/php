@@ -98,11 +98,6 @@ if (isset($_REQUEST['likes'])) {
 		));
 	}
 }
-//ここからいいね数の集計
-$like_counts = $db->prepare('SELECT COUNT(*) as cnt FROM likes WHERE posts_id=?');
-$like_counts->execute(array($post_id));
-$like_count = $like_counts->fetch();
-$outPutLikes = $like_count['cnt'];
 
 // ================== /「いいね！」ここまで ===================
 
@@ -218,7 +213,14 @@ if (isset($_REQUEST['retweet'])) {
 							<a href="index.php?likes=<?php print h($post_id); ?>"><span class="fa fa-heart unlike"></span></a>
 						<?php endif; ?>
 						<!-- いいね！の件数出力 -->
-						<?php print h($outPutLikes) ?>
+						<!-- ここからいいね数の集計 -->
+						<?php
+						$like_counts = $db->prepare('SELECT COUNT(*) as cnt FROM likes WHERE posts_id=?');
+						$like_counts->execute(array($post_id));
+						$like_count = $like_counts->fetch();
+						$outPutLikes = $like_count['cnt'];
+						print h($outPutLikes);
+						?>
 
 						<!-- ============ /いいね！ここまで ============ -->
 
