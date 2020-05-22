@@ -73,7 +73,7 @@ function makeLink($value)
 
 
 // ================== ここから「いいね！」 ===================
-//ログインユーザーがいいね！済みかどうか確認
+//まずログインユーザーがいいね！済みかどうか確認（いいねが１件以上の場合重複登録不可）
 if (isset($_REQUEST['likes'])) {
 	$checkOfLikes = $db->prepare('SELECT COUNT(*) AS cnt FROM likes WHERE member_id=? AND posts_id=?');
 	$checkOfLikes->execute(array(
@@ -81,16 +81,16 @@ if (isset($_REQUEST['likes'])) {
 		$_REQUEST['likes']
 	));
 	$checkResult = $checkOfLikes->fetch();
-	//いいね！済みであればいいね-1、まだならいいね！+1
+	//ここからいいね！の動作の定義
 	if ($checkResult['cnt'] > 0) {
-		//いいね済みなら削除
+		//いいね済みならDELETE
 		$delete = $db->prepare('DELETE FROM likes WHERE member_id=? AND posts_id=?');
 		$delete->execute(array(
 			$member['id'],
 			$_REQUEST['likes']
 		));
 	} else {
-		//まだいいねしてないならいいね追加
+		//まだいいねしてないならINSERT
 		$like = $db->prepare('INSERT INTO likes SET member_id=?, posts_id=?, created=NOW()');
 		$like->execute(array(
 			$member['id'],
@@ -98,6 +98,12 @@ if (isset($_REQUEST['likes'])) {
 		));
 	}
 }
+//ここからいいね数の集計
+$like_counts = $db->prepare('SELECT COUNT(*) as cnt FROM likes WHERE posts_id=?');
+$like_counts->execute(array($post_id));
+$like_count = $like_counts->fetch();
+$outPutLikes = $like_count['cnt'];
+
 // ================== /「いいね！」ここまで ===================
 
 
@@ -194,6 +200,7 @@ if (isset($_REQUEST['retweet'])) {
 						<?php endif; ?>
 						<!---- ===========「いいね！」ここから ============= ---->
 						<!-- ログインユーザーがいいね！済みかどうか確認 -->
+						<!-- この辺も上にまとめて書けるね？ -->
 						<?php
 						//いいね！する投稿がリツイートされていれば、リツイート元のpostIDを利用する
 						if ($post['retweet_id'] > 0) {
@@ -201,28 +208,18 @@ if (isset($_REQUEST['retweet'])) {
 						} else {
 							$post_id = $post['id'];
 						}
-						$favorites_check = $db->prepare('SELECT COUNT(*) AS cnt FROM likes WHERE member_id=? AND posts_id=?');
-						$favorites_check->execute(array(
-							$member['id'],
-							$post_id
-						));
-						$favorite_check = $favorites_check->fetch();
 						?>
-						<!-- いいね！済みであればいいね-1、まだならいいね！+1 -->
-						<?php if ($favorite_check['cnt'] > 0) : ?>
-							<!-- いいね済みなら削除 -->
+						<!-- いいね！済みであればいいね-1、まだならいいね！+1をcssで分かりやすく表示するための条件分岐 -->
+						<?php if ($checkResult['cnt'] > 0) : ?>
+							<!-- 既にいいね済→→削除 -->
 							<a href="index.php?likes=<?php print h($post_id); ?>"><span class="fa fa-heart like"></span></a>
 						<?php else : ?>
-							<!-- 未いいねなら追加 -->
+							<!-- 未いいね→→追加 -->
 							<a href="index.php?likes=<?php print h($post_id); ?>"><span class="fa fa-heart unlike"></span></a>
 						<?php endif; ?>
-						<!-- いいね！の件数を取得し、出力 -->
-						<?php
-						$like_counts = $db->prepare('SELECT COUNT(*) as cnt FROM likes WHERE posts_id=?');
-						$like_counts->execute(array($post_id));
-						$like_count = $like_counts->fetch();
-						print h($like_count['cnt']);
-						?>
+						<!-- いいね！の件数出力 -->
+						<?php print h($outPutLikes) ?>
+
 						<!-- ============ /いいね！ここまで ============ -->
 
 						<!-- ============ リツイートここから =========== -->
