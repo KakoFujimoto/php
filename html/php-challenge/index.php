@@ -98,7 +98,6 @@ if (isset($_REQUEST['likes'])) {
 		));
 	}
 }
-
 // ================== /「いいね！」ここまで ===================
 
 
@@ -215,11 +214,11 @@ if (isset($_REQUEST['retweet'])) {
 						<!-- いいね！の件数出力 -->
 						<!-- ここからいいね数の集計 -->
 						<?php
+						//いいね数の集計処理
 						$like_counts = $db->prepare('SELECT COUNT(*) as cnt FROM likes WHERE posts_id=?');
-						$like_counts->execute(array($post_id));
+						$like_counts->execute(array($post['id']));
 						$like_count = $like_counts->fetch();
-						$outPutLikes = $like_count['cnt'];
-						print h($outPutLikes);
+						print h($like_count['cnt']);
 						?>
 
 						<!-- ============ /いいね！ここまで ============ -->
