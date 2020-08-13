@@ -6,23 +6,26 @@ require('dbconnect.php');
 $name = $_POST['name'];
 $message = $_POST['message'];
 
-$sql = 'INSERT INTO messages (message,name,created) VALUES (:message, :name, NOW())';
-$stmt = $db->prepare($sql);
-$params = array(':message' => $message, ':name' => $name);
-$stmt->execute($params);
-
-// 出力
-$posts = $db->prepare('SELECT message, name, created FROM messages');
-$posts->execute();
-
-
-// 並び替え
-$asort = 'SELECT message, name, created FROM messages ORDER BY created';
-if (isset($_POST['sort']) && $_POST['sort'] === 'desc') {
-    $asort = $asort . ' DESC';
+function insertPost($name, $message, PDO &$db)
+{
+    $sql = 'INSERT INTO messages (message,name,created) VALUES (:message, :name, NOW())';
+    $stmt = $db->prepare($sql);
+    $params = array(':message' => $message, ':name' => $name);
+    $stmt->execute($params);
 }
-$asort = $db->prepare($asort);
-$asort->execute();
+// 出力＆並び替え
+function getPostList(PDO &$db)
+{
+    $sql = 'SELECT message, name, created FROM messages ORDER BY created';
+    if (isset($_POST['sort']) && $_POST['sort'] === 'desc') {
+        $sql = $sql . ' DESC';
+    }
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+}
+
+insertPost($name, $message, $db);
+$result = getPostList($db);
 
 ?>
 <!DOCTYPE html>
@@ -52,8 +55,9 @@ $asort->execute();
         <input type="submit" value="並び替え">
     </form>
     <?php
-    foreach ($posts as $post) :
+    foreach ((array)$result as $post) :
     ?>
+
         <p>name:<?php echo $post['name']; ?></p>
         <p>message:<?php echo $post['message']; ?></p>
         <p>created:<?php echo $post['created']; ?></p>
