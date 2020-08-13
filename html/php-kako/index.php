@@ -12,6 +12,9 @@ function insertPost($name, $message, PDO &$db)
     $stmt = $db->prepare($sql);
     $params = array(':message' => $message, ':name' => $name);
     $stmt->execute($params);
+    if (!empty($_POST['submit'])) {
+        header('Location: ./');
+    }
 }
 // 出力＆並び替え
 function getPostList(PDO &$db): object
