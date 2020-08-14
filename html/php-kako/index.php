@@ -9,11 +9,12 @@ function setToken()
     $_SESSION['token'] = $token;
 }
 
-function checkToken()
+function isCorrectToken()
 {
-    if (empty($_SESSION['token']) || ($_SESSION['token'] !== $_POST['token'])) {
-        echo '不正なアクセスです';
-        exit;
+    if (!empty($_SESSION['token']) && ($_SESSION['token'] === $_POST['token'])) {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -31,8 +32,12 @@ function insertPost($name, $message, PDO &$db)
         $stmt->execute($params);
 
         if (!empty($_POST['submit'])) {
-            checkToken();
-            header('Location: ./');
+            if (isCorrectToken() === true) {
+                echo 'SEND!';
+            } else {
+                echo '不正なアクセスです';
+                header('Location: ./');
+            }
         }
     } else {
         setToken();
