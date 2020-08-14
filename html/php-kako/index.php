@@ -16,6 +16,13 @@ function insertPost($name, $message, PDO &$db)
         header('Location: ./');
     }
 }
+
+//htmlspecialchars短縮
+function h(string $s)
+{
+    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+}
+
 // 出力＆並び替え
 function getPostList(PDO &$db): object
 {
@@ -62,9 +69,9 @@ $result = getPostList($db);
     foreach ($result as $post) :
     ?>
 
-        <p>name:<?php echo $post['name']; ?></p>
-        <p>message:<?php echo $post['message']; ?></p>
-        <p>created:<?php echo $post['created']; ?></p>
+        <p>name:<?php echo h($post['name']); ?></p>
+        <p>message:<?php echo h($post['message']); ?></p>
+        <p>created:<?php echo h($post['created']); ?></p>
 
     <?php
     endforeach;
