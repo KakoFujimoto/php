@@ -2,18 +2,40 @@
 session_start();
 require('dbconnect.php');
 
+//CSRF対策
+function setToken()
+{
+    $token = sha1(uniqid(mt_rand(), true));
+    $_SESSION['token'] = $token;
+}
+
+function checkToken()
+{
+    if (empty($_SESSION['token']) || ($_SESSION['token'] !== $_POST['token'])) {
+        echo '不正なアクセスです';
+        exit;
+    }
+}
+
 // 取得・DBへデータ挿入
 $name = $_POST['name'];
 $message = $_POST['message'];
 
 function insertPost($name, $message, PDO &$db)
 {
-    $sql = 'INSERT INTO messages (message,name,created) VALUES (:message, :name, NOW())';
-    $stmt = $db->prepare($sql);
-    $params = array(':message' => $message, ':name' => $name);
-    $stmt->execute($params);
-    if (!empty($_POST['submit'])) {
-        header('Location: ./');
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message']) && isset($_POST['name'])) {
+
+        $sql = 'INSERT INTO messages (message,name,created) VALUES (:message, :name, NOW())';
+        $stmt = $db->prepare($sql);
+        $params = array(':message' => $message, ':name' => $name);
+        $stmt->execute($params);
+
+        if (!empty($_POST['submit'])) {
+            checkToken();
+            header('Location: ./');
+        }
+    } else {
+        setToken();
     }
 }
 
@@ -54,6 +76,7 @@ $result = getPostList($db);
         <p>なまえ</p><input type="text" name="name">
         <p>ひとこと</p><input type="text" name="message">
         <p>投稿する</p><input type="submit" value="submit">
+        <input type="hidden" namr="token" value="<?php echo h($_SESSION['token']); ?>">
     </form>
     <!-- 並び替えボタン -->
     <form action="" method="post">
