@@ -26,10 +26,14 @@ function insertPost($name, $message, PDO &$db)
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message']) && isset($_POST['name'])) {
 
-        $sql = 'INSERT INTO messages (message,name,created) VALUES (:message, :name, NOW())';
-        $stmt = $db->prepare($sql);
-        $params = array(':message' => $message, ':name' => $name);
-        $stmt->execute($params);
+        try {
+            $sql = 'INSERT INTO messages (message,name,created) VALUES (:message, :name, NOW())';
+            $stmt = $db->prepare($sql);
+            $params = array(':message' => $message, ':name' => $name);
+            $stmt->execute($params);
+        } catch (PDOException $e) {
+            echo 'データベースエラー';
+        }
 
         if (!empty($_POST['submit'])) {
             if (isCorrectToken() === true) {
@@ -53,13 +57,17 @@ function h(string $s)
 // 出力＆並び替え
 function getPostList(PDO &$db): object
 {
-    $sql = 'SELECT message, name, created FROM messages ORDER BY created';
-    if (isset($_POST['sort']) && $_POST['sort'] === 'desc') {
-        $sql = $sql . ' DESC';
+    try {
+        $sql = 'SELECT message, name, created FROM messages ORDER BY created';
+        if (isset($_POST['sort']) && $_POST['sort'] === 'desc') {
+            $sql = $sql . ' DESC';
+        }
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    } catch (PDOException $e) {
+        echo 'データベースエラー';
     }
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    return $stmt;
 }
 
 insertPost($name, $message, $db);
