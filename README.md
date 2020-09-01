@@ -9,10 +9,12 @@
 
 ## ブランチ詳細
 
-```
-<li>feature/php-challenge 掲示板への２種の機能追加</li>
+<li>feature/php-challenge…掲示板への２種の機能追加</li>
+<li>feature/php-challenge…掲示板への２種の機能追加</li>
+<li>feature/php-challenge…掲示板への２種の機能追加</li>
+<li>feature/php-challenge…掲示板への２種の機能追加</li>
 
-```
+
 
 ## ディレクトリ解説
 
