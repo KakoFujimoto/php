@@ -15,7 +15,9 @@
 
 - 動作(例)
 リクエスト(例)※MAMP環境の場合
+```
 http://localhost:10080/php-pre-challenge3/index.php?target=34
+```
 
 - データベースの値(例)
 prechallenge3テーブル
