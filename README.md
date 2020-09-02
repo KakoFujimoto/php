@@ -6,13 +6,13 @@
 
 ## ブランチ詳細
 
-- [feature/php-pre-challenge1/html/php-pre-challenge/...掲示板への２種の機能追加（いいね、リツイート機能）](https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-challenge/README.md)
+- [feature/php-pre-challenge1/html/php-pre-challenge/...掲示板への２種の機能追加](https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-challenge/README.md)
 
 
-- [feature/php-pre-challenge1/html/php-pre-challenge1/..条件分岐に関する基本的な問題（FizzBuzz）](https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge1/README.md)
+- [feature/php-pre-challenge1/html/php-pre-challenge1/..条件分岐に関する基本的な問題](https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge1/README.md)
 
 
-- [feature/php-pre-challenge1/html/php-pre-challenge2/..配列操作に関する問題（ソート関数を使わずに並び替え）](https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge2/README.md)
+- [feature/php-pre-challenge1/html/php-pre-challenge2/..配列操作に関する問題](https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge2/README.md)
 
 
 - [feature/php-pre-challenge1/html/php-pre-challenge3/..データーベースへの接続と探索アルゴリズム](https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge3/README.md)
