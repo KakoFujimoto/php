@@ -33,6 +33,7 @@ Array
 )
 ```
 
+## ファイル位置
 ```
 feature/php-pre-challenge2/html/php-pre-challenge2/index.php
 ```
