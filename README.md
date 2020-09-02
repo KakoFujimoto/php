@@ -6,10 +6,11 @@
 
 ## ブランチ詳細
 
-<li><a href="https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-challenge/README.md">feature/php-challenge...掲示板への２種の機能追加</a></li>
-<li><a href="https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge1/README.md">feature/php-challenge1..条件分岐に関する基本的な問題（FizzBuzz）</a></li>
-<li>feature/php-challenge2..配列操作に関する問題（ソート関数を使わずに並び替えを行う）</li>
-<li>feature/php-challenge3..掲示板への２種の機能追加（データーベースへの接続と探索アルゴリズムに関する問題）</li>
+feature/php-pre-challenge1/html/php-pre-challenge1/index.php
+- <a href="https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-challenge/README.md">feature/php-challenge...掲示板への２種の機能追加</a>
+- <a href="https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge1/README.md">feature/php-challenge1..条件分岐に関する基本的な問題（FizzBuzz）</a>
+- feature/php-challenge2..配列操作に関する問題（ソート関数を使わずに並び替えを行う）
+- feature/php-challenge3..掲示板への２種の機能追加（データーベースへの接続と探索アルゴリズムに関する問題）
 
 
 
