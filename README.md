@@ -1,6 +1,6 @@
 # FizzBuzz問題
 
-<a href="https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge1/html/php-pre-challenge1/index.php">コードを見る</a>
+[コードを見る](https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge1/html/php-pre-challenge1/index.php)
 
 - 1から100までの数をforで繰り返しプリントするプログラムです。
 - 但し、3の倍数の時には数の代わりに「3の倍数」と出力します。
