@@ -20,9 +20,8 @@ http://localhost:10080/php-pre-challenge3/index.php?target=34
 - データベースの値(例)
 prechallenge3テーブル
 
-|header1|
-|:--|
 |value|
+|:--|
 |17|
 |3|
 |1|
