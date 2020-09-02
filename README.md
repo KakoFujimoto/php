@@ -1,13 +1,13 @@
 # 【PHPコーディング】
 
 ## 使用書籍
-<a href="https://www.amazon.co.jp/%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8BPHP%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8-%E3%80%90PHP7%E5%AF%BE%E5%BF%9C%E7%89%88%E3%80%91-%E6%95%99%E7%A7%91%E6%9B%B8%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E3%81%9F%E3%81%AB%E3%81%90%E3%81%A1-%E3%81%BE%E3%81%93%E3%81%A8-ebook/dp/B07C3QQKTX/" target="_blank">よくわかるPHPの教科書【PHP7対応版】/たにぐちまこと著</a>
+<a href="https://www.amazon.co.jp/%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8BPHP%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8-%E3%80%90PHP7%E5%AF%BE%E5%BF%9C%E7%89%88%E3%80%91-%E6%95%99%E7%A7%91%E6%9B%B8%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E3%81%9F%E3%81%AB%E3%81%90%E3%81%A1-%E3%81%BE%E3%81%93%E3%81%A8-ebook/dp/B07C3QQKTX/">よくわかるPHPの教科書【PHP7対応版】/たにぐちまこと著</a>
 
 
 ## ブランチ詳細
 
-<li>feature/php-challenge...掲示板への２種の機能追加</li>
-<li><a href="https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge1/README.md" target="_blank">feature/php-challenge1..条件分岐に関する基本的な問題（FizzBuzz）</a></li>
+<li><a href="https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-challenge/README.md">feature/php-challenge...掲示板への２種の機能追加</a></li>
+<li><a href="https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge1/README.md">feature/php-challenge1..条件分岐に関する基本的な問題（FizzBuzz）</a></li>
 <li>feature/php-challenge2..配列操作に関する問題（ソート関数を使わずに並び替えを行う）</li>
 <li>feature/php-challenge3..掲示板への２種の機能追加（データーベースへの接続と探索アルゴリズムに関する問題）</li>
 
