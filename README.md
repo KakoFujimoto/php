@@ -22,7 +22,7 @@ prechallenge3テーブル
 
 |header1|
 |:--|
-|align left|
+|value|
 |17|
 |3|
 |1|
