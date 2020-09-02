@@ -6,25 +6,3 @@
 ```
 http://localhost:10080/php-pre-challenge2/index.php?array=3,2,1,4,15,18,13,99,77,66,1,100,0
 ```
-
-## データベース接続情報
-MySQL バージョン 5.7.x
-
-
-### コンテナ内部から接続する場合
-```
-host:mysql
-port:3306
-user:test
-password:test
-dbname:test
-```
-
-### Macから接続する場合
-```
-host:localhost
-port:13306
-user:test
-password:test
-dbname:test
-```
