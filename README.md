@@ -23,7 +23,7 @@
 - リツイートに対して いいね を押下した場合、RT元の投稿のいいね数が+1される
 ※TwitterのコメントなしのRTに対していいねした時と同じ挙動
 
-# FizzBuzz問題
+### FizzBuzz問題
 
 [コードを見る](https://github.com/KakoFujimoto/quelcode-php/blob/feature/php-pre-challenge1/html/php-pre-challenge1/index.php)
 
